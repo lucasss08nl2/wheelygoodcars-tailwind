@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
-
-Route::middleware('auth')->group(function () {
-    //
+    return redirect('/dashboard');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/sell', [CarController::class, 'sell']);
+Route::get('/dashboard', [CarController::class, 'dashboard']);
+
+Route::post('/cars', [CarController::class, 'store']);
+Route::delete('/cars/{id}', [CarController::class, 'destroy']);
